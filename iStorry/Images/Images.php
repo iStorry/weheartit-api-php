@@ -1,6 +1,8 @@
 <?php
 class Images extends cURL {
        protected $endpoint = 'https://api.weheartit.com';
+       protected $clientID = '';
+       protected $clientSecret = '';
        protected $args = array(
              'users' => '/api/users',
              'search_images' => 'api/v2/search/entries',
