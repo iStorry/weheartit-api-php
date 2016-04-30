@@ -13,7 +13,7 @@ A We heart it Api (see [http://weheartit.com]([http://weheartit.com) for more in
 
 ### Installation
 
-To install PHP Curl Class, simply:
+To install PHP Curl, simply:
 
     $ apt-get install php5-curl
 
@@ -26,9 +26,12 @@ PHP Curl Class works with PHP 5.3, 5.4, 5.5, 5.6, 7.0, and HHVM.
 More examples are available under [/examples](https://github.com/php-curl-class/php-curl-class/tree/master/examples).
 
 ```php
+session_start();
 require __DIR__ . '/autoload.php';
 
 use Curl as cURL;
 use Images as Image;
 
 $img = new Image('username', 'password');
+
+$img->__user();
