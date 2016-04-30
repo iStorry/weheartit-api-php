@@ -123,7 +123,7 @@ class Images extends cURL {
        **/
       protected function __authorization(){
 		  $this->cURL->headers['Authorization'] = 'Bearer '.$this->access_token;
-	  }
+      }
       /**
         *  Initializes a User
         *
@@ -132,9 +132,9 @@ class Images extends cURL {
         * @access public
         *
        **/ 
-	  public function __user(){
-         $this->__authorization(); // Setting Headers Authorization
-         $res = $this->cURL->get($this->endpoint . '/' .$this->args['user']);
-         return json_decode($res->body, TRUE);
-	  }
+       public function __user(){
+         	$this->__authorization(); // Setting Headers Authorization
+         	$res = $this->cURL->get($this->endpoint . '/' .$this->args['user']);
+         	return json_decode($res->body, TRUE);
+	}
 }
