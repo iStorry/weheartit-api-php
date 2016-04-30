@@ -8,6 +8,7 @@ A We heart it Api (see [http://weheartit.com]([http://weheartit.com) for more in
 
 - [Installation](#installation)
 - [Requirements](#requirements)
+- [Usage](#usage)
 
 ---
 
@@ -21,10 +22,6 @@ To install PHP Curl, simply:
 
 PHP Curl Class works with PHP 5.3, 5.4, 5.5, 5.6, 7.0, and HHVM.
 
-### Quick Start and Examples
-
-More examples are available under [/examples](https://github.com/php-curl-class/php-curl-class/tree/master/examples).
-
 ```php
 session_start();
 require __DIR__ . '/autoload.php';
@@ -35,3 +32,19 @@ use Images as Image;
 $img = new Image('username', 'password');
 
 $img->__user();
+
+```
+
+### Usage and Examples
+
+More examples are available under [/examples](https://github.com/iStorry/weheartit-api-php/tree/master/examples).
+```php 
+
+$result = $img->__getImages($_GET["query"]);
+
+```
+[Query Search](localhost/weheartit-api-php/examples/search_images.php?query=cats).
+
+```
+http://example.com/weheartit-api-php/examples/search_images.php?query=cats
+```
