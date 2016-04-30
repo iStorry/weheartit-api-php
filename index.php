@@ -8,5 +8,7 @@ use Images as Image;
 
 
 $img = new Image('username','password');
-$o = $img->__user();
-print_r($o);
+$o = $img->__getImages();
+foreach ($o['entries'] as $key => $value) {
+   echo $value['media'][0]['url']."<br>";
+}

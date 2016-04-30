@@ -24,7 +24,7 @@
 
 class Images extends cURL {
        /**
-        * The api url for HTTP connection with weheartit 
+        * The api url for HTTP connection with weheartit
         *
         * @var string
         * @access protected
@@ -37,7 +37,7 @@ class Images extends cURL {
         * @var string
         * @access protected
        **/
-       
+
        protected $clientID = '{client-id}';
 
        /**
@@ -50,28 +50,30 @@ class Images extends cURL {
        protected $clientSecret = '{client-secret}';
 
        /**
-        * The accesstoken to send along with requests 
+        * The accesstoken to send along with requests
         *
         * @var string
-        * @access public 
+        * @access public
        **/
 
        public $access_token = NULL;
 
        /**
-        *  Curl Response 
+        *  Curl Response
         *
-        * @var string 
-        * @access protected 
+        * @var string
+        * @access protected
        **/
+
+
        protected $response = NULL;
-       
+
        /**
         * api endpoints
         *
-        * @var string 
-        * @access protected 
-       **/ 
+        * @var string
+        * @access protected
+       **/
        protected $args = array(
              'user' => '/api/v2/user',
              'search_images' => 'api/v2/search/entries',
@@ -82,12 +84,22 @@ class Images extends cURL {
         * Initializes a Curl object
         *
        **/
+
+       protected $include_array = 'placeholder_color,promoted,promoted_cta,cropping,actionable,actions,video';
+       /**
+         * Query Include
+         *
+         * @var string
+         * @access protected
+         *
+        **/
+
        public function __construct($user, $pass){
              $this->cURL = new cURL();
                 if(empty($user && $pass)){
                     throw new RuntimeException("Error Processing Request: Username & Password Required", 1);
                 }
-             $this->__token($user, $pass); // Acquiring Token Now 
+             $this->__token($user, $pass); // Acquiring Token Now
        }
 
       /**
@@ -99,7 +111,7 @@ class Images extends cURL {
         * @param string $this->endpoint
         * @param array|string $vars
         * @return CurlResponse|boolean
-		* @access protected 
+		* @access protected
        **/
       protected function __token($user, $pass){
            $response = $this->cURL->post($this->endpoint . '/' . $this->args['oauth'],
@@ -127,14 +139,31 @@ class Images extends cURL {
       /**
         *  Initializes a User
         *
-        * @return : user profile details 
+        * @return : user profile details
         *
         * @access public
         *
-       **/ 
+       **/
        public function __user(){
          	$this->__authorization(); // Setting Headers Authorization
          	$res = $this->cURL->get($this->endpoint . '/' .$this->args['user']);
          	return json_decode($res->body, TRUE);
-	}
+	   }
+
+       /**
+         * Requesting images
+         *
+         * @return images-url
+         *
+         * @access public
+         *
+        **/
+        public function __getImages($query = "kawaii", $limit = 24){
+            $this->__authorization(); // Setting Headers Authorization
+            $res = $this->cURL->get($this->endpoint . '/' .$this->args['search_images'],
+            $vars = array('exclude' => 'tags', 'include' => $this->include_array,
+            'limit' => $limit, 'query' => $query, 'sort' => 'most_recent'));
+            return json_decode($res->body, TRUE);
+        }
+
 }
